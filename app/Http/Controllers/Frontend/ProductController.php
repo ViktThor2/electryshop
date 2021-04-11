@@ -11,24 +11,26 @@ class ProductController extends Controller
 {
     public function index()
     {
+      $maxPrice = Product::max('price');
       $products = Product::paginate('8');
       $categories = SubCategory::all();
 
       return view('frontend.product.index')
           ->with('products', $products)
-          ->with('categories', $categories);
+          ->with('categories', $categories)
+          ->with('maxPrice', $maxPrice);
     }
 
     public function filterProduct(Request $request)
     {
-      $products = new Product;
+      $maxPrice = Product::max('price');
       $products = Product::filter($request)->paginate('8');
       $categories = SubCategory::all();
 
       return view('frontend.product.index')
         ->with('products', $products)
-        ->with('categories', $categories);
+        ->with('categories', $categories)
+        ->with('maxPrice', $maxPrice);
     }
-
 
 }

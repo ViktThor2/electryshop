@@ -4,16 +4,16 @@
 
 <div class="row">
 
-  <div class="col-lg-3" id="productFilterBar">
-    <form action="{{ route('product.filter') }}" method="get">
+  <div class="col-lg-3">
+    <form action="{{route('product.filter')}}" method="get">
         @csrf
-        <div class="card h-100">
-            @include('frontend.product.sortProduct')
-            @include('frontend.product.filterCategory')
-      <button type="input" class="btn btn-primary">Keresés</button>
-    </div>
+        @include('frontend.product.sorting')
+        @include('frontend.product.filterCategory')
+        @include('frontend.product.filterPrice')
+        <button type="input" class="btn btn-primary mt-4 w-100">Keresés</button>
     </form>
   </div>
+
 
   <div class="col-lg-9">
     <div class="row">
@@ -23,6 +23,7 @@
     <div class="d-flex justify-content-end">
         {!! $products->links() !!}
     </div>
+
   </div>
 
 </div>

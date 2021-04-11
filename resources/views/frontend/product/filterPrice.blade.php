@@ -1,28 +1,16 @@
+<h4 class="font-weight-bold mt-4 mb-2">Árkategória</h4>
 
-<!-- Section: price -->
-<section class="mb-4" id = "price">
+  @for ($i=0; $i < $maxPrice; $i+25000)
+     <div class="form-check pl-0 border">
 
-  <div class="slider-price d-flex align-items-center my-4">
+       <input type="checkbox" name="filterPrice[]"
+         class="form-check-input filled-in"
+         value = "{{ $i }}" id="{{ $i }}">
 
-    <span class="font-weight-normal small text-muted mr-2">
-      0 Ft
-    </span>
-
-    <form class="multi-range-field w-100" method="post"
-          action="{{route('filter.price')}}">
-          @csrf
-
-      <input id="multi" name="price_filter"
-             class="multi-range w-100" type="range" />
-
-      <button type="submit" class="btn btn-primary">
-             Keresés</button>
-    </form>
-
-    <span class="font-weight-normal small text-muted ml-2">
-      {{ $maxPrice }} Ft
-    </span>
-
-  </div>
-
-</section>
+        <label class="form-check-label
+               card-link-secondary"
+               for="{{ $i }}">
+                {{ $i }} - {{ $i + 25000 }} Ft
+        </label>
+      </div>
+  @endfor

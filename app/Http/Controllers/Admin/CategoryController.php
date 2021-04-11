@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-      $subCategories = SubCategory::all();
+      $subCategories = SubCategory::paginate('10');
       return view('admin.category.index')
         ->with('subCategories', $subCategories);
     }

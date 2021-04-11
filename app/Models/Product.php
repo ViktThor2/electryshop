@@ -16,6 +16,48 @@ class Product extends Model
       $this->category_id     = $category;
     }
 
+
+    public function scopeFilter($query, $data)
+    {
+      if(null !== $data->sortProduct && $data->sortProduct) {
+        switch ($data->sortProduct) {
+          case 'sort_cheap':
+            $query->orderBy('price', 'asc');
+          break;
+
+          case 'sort_expensive':
+            $query->orderBy('price', 'desc');
+          break;
+
+          case 'sort_abc':
+            $query->orderBy('name', 'asc');
+          break;
+
+          case 'sort_cba':
+            $query->orderBy('name', 'desc');
+          break;
+        }
+      }
+
+      if(null !== $data->filterCategory && $data->filterCategory) {
+        foreach ($data->filterCategory as $key => $value) {
+          $query->orWhere('sub_category_id', 'LIKE', '%'.$value.'%');
+        }
+      }
+
+      if(null !== $data->filterPrice && $data->filterPrice) {
+        foreach ($data->filterPrice as $key => $value) {
+          $query->whereNotBetween('price', [$value, $value + 25000]);
+        }
+      }
+
+    }
+
+    public function scopeFilterCategory($query, $data)
+    {
+      $query->orWhere('sub_category_id', 'LIKE', $data);
+    }
+
     public function category()
     {
       return $this->belongsTo(Category::class);
@@ -26,35 +68,9 @@ class Product extends Model
       return $this->belongsTo(SubCategory::class);
     }
 
-    public function scopeFilter($query, $data)
+    public function deliveries()
     {
-      if(null !== $data->sortProduct && $data->sortProduct)
-      {
-        switch ($data->sortProduct) {
-            case 'sort_cheap':
-              $query->orderBy('price', 'asc');
-            break;
-
-            case 'sort_expensive':
-              $query->orderBy('price', 'desc');
-            break;
-
-            case 'sort_abc':
-              $query->orderBy('name', 'asc');
-            break;
-
-            case 'sort_cba':
-              $query->orderBy('name', 'desc');
-            break;
-        }
-      }
-
-      if(null !== $data->filterCategory && $data->filterCategory)
-      {
-        foreach ($data->filterCategory as $key => $value) {
-          $query->orWhere('subcategory', 'LIKE', '%'.$value.'%');
-        }
-      }
-
+      return $this->belongsToMany(Delivery::class);
     }
+
 }

@@ -27,4 +27,8 @@
     </tbody>
   </table>
 
+  <div class="d-flex justify-content-end">
+      {!! $subCategories->links() !!}
+  </div>
+
 @stop

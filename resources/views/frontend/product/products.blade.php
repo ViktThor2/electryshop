@@ -1,6 +1,6 @@
 @foreach ($products as $product_item)
 
-   <div class="col-lg-3 col-md-6 mb-4" id="productC">
+   <div class="col-lg-3 col-md-6 mb-4" id="productCard">
      <div class="card h-100">
 
        <div class="card-img-top">

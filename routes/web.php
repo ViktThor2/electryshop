@@ -85,11 +85,33 @@ Route::namespace('Admin')->group(function () {
         Route::post('/admin/kategoriak/letrehoz', 'CategoryController@store')->name('admin.category.store');
         Route::post('/admin/alkategoriak/letrehoz', 'CategoryController@subCategoryStore')->name('admin.subCategory.store');
 
+        // Vásárlók
+        Route::get('/admin/vasarlok', 'CustomerController@index')->name('admin.customer.index');
+        Route::get('/admin/vasarlok/uj', 'CustomerController@create')->name('admin.customer.create');
+        Route::post('/admin/vasarlok/uj', 'CustomerController@store')->name('admin.customer.store');
+
         // Termékek
         Route::get('/admin/termekek', 'ProductController@index')->name('admin.product.index');
         Route::get('/admin/termek/letrehoz', 'ProductController@create')->name('admin.product.create');
         Route::post('/admin/termek/letrehoz', 'ProductController@store')->name('admin.product.store');
         Route::get('/admin/termek/torles/{id}', 'ProductController@destroy')->name('admin.product.delete');
+
+        // Termék Szürés
+        Route::get('/admin/termekek/szures', 'ProductController@filterCategory')->name('admin.product.filter.category');
+
+        // Rendelések
+        Route::get('/admin/rendelesek', 'OrderController@index')->name('admin.order.index');
+        Route::get('/admin/rendelesek/uj', 'OrderController@create')->name('admin.order.create');
+        Route::post('/admin/rendelesek/uj', 'OrderController@store')->name('admin.order.store');
+
+        // Szállítási Módok
+        Route::get('/admin/szallitas', 'DeliveryController@index')->name('admin.delivery.index');
+        Route::post('/admin/szallitas/uj', 'DeliveryController@store')->name('admin.delivery.store');
+
+        // Termékek Szállítási módja
+        Route::get('/admin/termekek/szallitas', 'ProductDeliveryController@index')->name('admin.product.delivery.index');
+        Route::get('/admin/termekek/szallitas/modosit/{productId}', 'ProductDeliveryController@edit')->name('admin.product.delivery.edit');
+        Route::post('/admin/termekek/szallitas/modosit/{productId}', 'ProductDeliveryController@update')->name('admin.product.delivery.update');
 
     });
 

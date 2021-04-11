@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ShopCart;
+use App\Models\Delivery;
 
 class ShopCartController extends Controller
 {
@@ -21,7 +22,10 @@ class ShopCartController extends Controller
       }
       session()->put('scart', $scart);
 
+      $deliveries = Delivery::all();
+
       return view('frontend.shopcart.index')
+          ->with('deliveries', $deliveries)
           ->with('sum', $sum);
     }
 

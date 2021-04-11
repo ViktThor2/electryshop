@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Delivery;
 
 class ProductController extends Controller
 {
     public function index()
     {
       $products = Product::paginate('10');
+      $categories = SubCategory::all();
+
       return view('admin.product.index')
-        ->with('products', $products);
+        ->with('products', $products)
+        ->with('categories', $categories);
     }
 
     public function create()
@@ -50,4 +54,15 @@ class ProductController extends Controller
 
       return redirect()->route('admin.product.index');
     }
+
+    public function filterCategory(Request $request)
+    {
+      $products = Product::filterCategory($request->filterCategory)->paginate('8');
+      $categories = SubCategory::all();
+
+      return view('admin.product.index')
+        ->with('products', $products)
+        ->with('categories', $categories);
+    }
+
 }

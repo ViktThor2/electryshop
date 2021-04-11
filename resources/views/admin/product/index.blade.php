@@ -2,22 +2,28 @@
 
 @section('content')
 
-  <div class="d-flex justify-content-end">
-    <a href="{{route('admin.product.create')}}"
-    class="btn btn-primary mt-2">Új termék</a>
+<div class="row">
+
+  <div class="col-lg-10">
+    @include('admin.product.filterCategory')
   </div>
+
+  <div class="col-lg-2 d-flex justify-content-end">
+    <a href="{{route('admin.product.create')}}"
+    class="btn btn-primary mt-2 mb-4">Új termék</a>
+  </div>
+</div>
 
   <table class="table table-hover mt-3">
 
     <thead>
       <tr>
-        <th scope="col" width="5%">Id</th>
-        <th scope="col" width="25%">Név</th>
-        <th scope="col" width="15%">Kategória</th>
-        <th scope="col" width="15%">Alkategória</th>
-        <th scope="col" width="10%">Ár</th>
-        <th scope="col" width="10%">Mennyiség</th>
-        <th scope="col" width="10%">Státusz</th>
+        <th>Id</th>
+        <th>Név</th>
+        <th>Kategória</th>
+        <th>Ár</th>
+        <th>Mennyiség</th>
+        <th>Státusz</th>
         <th></th>
       </tr>
     </thead>
@@ -27,9 +33,12 @@
         <tr>
           <td class="align-middle">{{ $product->id }}</td>
           <td class="align-middle">{{ $product->name }}</td>
-          <td class="align-middle">{{ $product->category->name }}</td>
-          <td class="align-middle">{{ $product->subcategory->name }}</td>
-          <td class="align-middle">{{ $product->price }} Ft</td>
+          <td class="align-middle">
+            {{ $product->category->name }} \ {{ $product->subcategory->name }}
+          </td>
+          <td class="align-middle">
+            {{number_format($product->price,0,",",".") }} Ft
+          </td>
           <td class="align-middle">{{ $product->qty }} db</td>
           <td class="align-middle">@if($product->active == 1) Rendelhető
               @else Nem rendelhető
@@ -43,9 +52,5 @@
       @endforeach
     </tbody>
   </table>
-
-  <div class="d-flex justify-content-end">
-      {!! $products->links() !!}
-  </div>
 
 @stop
