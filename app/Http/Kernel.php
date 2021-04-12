@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin_auth' => \App\Http\Middleware\AdminAuth::class,
         'customer_auth' => \App\Http\Middleware\CustomerAuth::class,
+        'shopcart_product_check' => \App\Http\Middleware\ShopCartProductCheck::class,
 
     ];
 

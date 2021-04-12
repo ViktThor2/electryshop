@@ -2,15 +2,19 @@
 
 @section('content')
 
+  @if(session()->has('message'))
+    <h3>{{session('message')}}</h3>
+  @endif
+
 <div class="row">
 
   <div class="col-lg-3">
-    <form action="{{route('product.filter')}}" method="get">
+    <form action="{{route('product.filter.category')}}" method="get">
         @csrf
         @include('frontend.product.sorting')
         @include('frontend.product.filterCategory')
         @include('frontend.product.filterPrice')
-        <button type="input" class="btn btn-primary mt-4 w-100">Keresés</button>
+        <button type="input" class="btn btn-primary mt-4 mb-5 w-100">Keresés</button>
     </form>
   </div>
 

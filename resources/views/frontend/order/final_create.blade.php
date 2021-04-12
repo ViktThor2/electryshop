@@ -7,10 +7,10 @@
 
     <thead>
       <tr>
-        <th scope="col">Név</th>
-        <th scope="col">Email cím</th>
-        <th scope="col">Telefonszám</th>
-        <th scope="col">Irányítószám</th>
+        <th>Név</th>
+        <th>Email cím</th>
+        <th>Telefonszám</th>
+        <th>Irányítószám</th>
         <th>Város</th>
         <th>Utca</th>
         <th>Házszám</th>
@@ -19,13 +19,13 @@
 
     <tbody>
       <tr>
-        <th scope="row">{{ $order->name }}</th>
-        <td>{{ $order->email }}</td>
-        <td>{{ $order->phone }}</td>
-        <td>{{ $order->postal }}</td>
-        <td>{{ $order->city }}</td>
-        <td>{{ $order->street }}</td>
-        <td>{{ $order->house }}</td>
+        <th scope="row">{{ session('adress')['name'] }}</th>
+        <td>{{ session('adress')['email'] }}</td>
+        <td>{{ session('adress')['phone'] }}</td>
+        <td>{{ session('adress')['postal'] }}</td>
+        <td>{{ session('adress')['city'] }}</td>
+        <td>{{ session('adress')['street'] }}</td>
+        <td>{{ session('adress')['house'] }}</td>
       </tr>
     </tbody>
 
@@ -45,23 +45,22 @@
     </thead>
 
     <tbody>
-
       @foreach(session('scart') as $id => $item)
         <tr>
           <td>{{ $item['name'] }}</td>
           <td>{{ $item['price'] }} Ft</td>
           <td>{{ $item['qty'] }} db</td>
-          <td>{{ $item['sum'] }} Ft</td>
+          <td>{{ number_format($item['sum'],0,",",".") }} Ft</td>
         </tr>
       @endforeach
 
       <tr>
         <td></td>
         <td></td>
-        <td></td>
-        <td></td>
+        <td>Végösszeg :</td>
+        <td>{{ number_format($sum,0,",",".") }}  Ft</td>
         <td>
-          <a href="{{ route('order.final.store', $order->id) }}"
+          <a href="{{ route('order.final.store') }}"
           class="btn btn-primary">Rendelés Leadása</a>
         </td>
       </tr>

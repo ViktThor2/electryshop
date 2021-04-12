@@ -80,8 +80,6 @@
       <input type="hidden" name="customer_id"
              value="{{ \Auth::guard('customer')->user()->id }}">
 
-      <input type="hidden" name="price" value="{{ $sum }}">
-
       <!-- Order button -->
       <button class="btn btn-primary btn-block mb-4"
               type="submit">Folytatás</button>

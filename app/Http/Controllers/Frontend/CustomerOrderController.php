@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\ShopCart;
+use App\Models\{Order, ShopCart};
 
 class CustomerOrderController extends Controller
 {
@@ -13,7 +12,7 @@ class CustomerOrderController extends Controller
     {
       $customer = \Auth::guard('customer')->user();
       $customerOrders = Order::where(
-          'customer_id', '=', $customer->id)->get();
+          'customer_id', '=', $customer->id)->paginate('10');
 
       return view('frontend.customer.order.myorders')
           ->with('customerOrders', $customerOrders);

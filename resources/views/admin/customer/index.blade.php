@@ -2,12 +2,7 @@
 
 @section('content')
 
-  <div class="d-flex justify-content-end">
-    <a href="{{route('admin.customer.create')}}"
-    class="btn btn-primary mt-2">Új vásárló</a>
-  </div>
-
-  <table class="table table-hover mt-3">
+  <table class="table table-hover">
 
     <thead>
       <tr>

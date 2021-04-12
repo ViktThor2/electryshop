@@ -23,7 +23,6 @@ class Customer extends Authenticatable
     }
 
     public function orders()  {
-        //1 a többhöz kapcsolat
       return $this->hasMany(Orders::Class);
     }
 

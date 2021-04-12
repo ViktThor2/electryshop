@@ -27,15 +27,20 @@ Route::namespace('Frontend')->group(function () {
     Route::delete('/kilepes', 'CustomerAuthController@destroy')->name('customer.auth.destroy');
 
     // Termékek
-    Route::get('/termekek', 'ProductController@index')->name('product.index');
-    Route::get('/termek/{$id}', 'ProductController@show')->name('product.show');
+    Route::get('/termekek/{id}', 'ProductController@index')->name('product.index');
+    Route::get('/termek/{id}', 'ProductController@show')->name('product.show');
 
     // Termék szürő
-    Route::get('/termekek/szures', 'ProductController@filterProduct')->name('product.filter');
+    Route::get('/termekek/szures', 'ProductFilterController@filterProduct')->name('product.filter.category');
+    Route::post('/termekek/kereses', 'ProductFilterController@search')->name('product.search');
 
     // Kosár
     Route::get('/kosar', 'ShopCartController@index')->name('scart.index');
-    Route::get('/kosarba/{itemId}/hozzaad', 'ShopCartController@add')->name('scart.add');
+
+    Route::middleware('shopcart_product_check')->group(function () {
+      Route::get('/kosarba/{itemId}/hozzaad', 'ShopCartController@add')->name('scart.add');
+    });
+
     Route::get('/kosarba/{itemId}/plus', 'ShopCartController@plus')->name('scart.plus');
     Route::get('/kosarba/{itemId}/minus', 'ShopCartController@minus')->name('scart.minus');
     Route::get('/kosarba/{itemId}/torles', 'ShopCartController@destroyProduct')->name('scart.delete');
@@ -47,8 +52,8 @@ Route::namespace('Frontend')->group(function () {
         // Rendelések
         Route::get('/rendeles', 'OrderController@create')->name('order.create');
         Route::post('/rendeles', 'OrderController@store')->name('order.store');
-        Route::get('/rendeles/osszegzes/{orderID}', 'OrderController@finalCreate')->name('order.final.create');
-        Route::get('/rendeles/lead/{orderID}', 'OrderController@finalStore')->name('order.final.store');
+        Route::get('/rendeles/osszegzes', 'OrderController@finalCreate')->name('order.final.create');
+        Route::get('/rendeles/lead', 'OrderController@finalStore')->name('order.final.store');
 
         // Vásrlók
         Route::get('/profil/modosit/{customerId}', 'CustomerController@edit')->name('customer.edit');

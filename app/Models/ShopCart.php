@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ShopCart extends Model
 {
@@ -11,6 +12,24 @@ class ShopCart extends Model
     $this->product_name  =  $data['name'];
     $this->product_price =  $data['price'];
     $this->product_qty   =  $data['qty'];
+  }
+
+  public function scopeSum()
+  {
+    $scart = session()->get('scart');
+    $sum = 0;
+    if(isset($scart))
+    {
+      foreach ($scart as $id => $value) {
+        $sum += $value['sum'];
+      }
+    }
+    return $sum;
+  }
+
+  public function productDecrement($projectId = 3)
+  {
+    DB::table('products')->decrement('qty', 3)->where('projectId', '=', '5');
   }
 
 }

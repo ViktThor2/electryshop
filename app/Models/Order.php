@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public function setData($data)
+    public function setData()
     {
-      $this->customer_id = $data['customer_id'];
-      $this->name   =  $data['name'];
-      $this->email  =  $data['email'];
-      $this->phone  =  $data['phone'];
-      $this->postal =  $data['postal'];
-      $this->city   =  $data['city'];
-      $this->street =  $data['street'];
-      $this->house  =  $data['house'];
-      $this->price  =  $data['price'];
-
-      if(isset($data['password']) && $data['password']) {
-        $this->password = \Hash::make($data['password']);
-      }
+      $this->customer_id = \Auth::guard('customer')->user()->id;
+      $this->delivery_id = session('scart')[100]['id'];
+      $this->name   =  session('adress')['name'];
+      $this->email  =  session('adress')['email'];
+      $this->phone  =  session('adress')['phone'];
+      $this->postal =  session('adress')['postal'];
+      $this->city   =  session('adress')['city'];
+      $this->street =  session('adress')['street'];
+      $this->house  =  session('adress')['house'];
     }
 
+    public function delivery()
+    {
+      return $this->belongsTo(Delivery::class);
+    }
 
 }

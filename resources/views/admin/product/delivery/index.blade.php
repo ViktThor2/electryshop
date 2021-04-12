@@ -2,11 +2,12 @@
 
 @section('content')
 
-  <table class="table table-hover mt-3">
+  <table class="table table-hover">
 
     <thead>
       <tr>
-        <th>Termék</th>
+        <th>Id</th>
+        <th>Termék neve</th>
         <th>Szállítási módok</th>
         <th></th>
       </tr>
@@ -15,6 +16,7 @@
     <tbody>
       @foreach($products as $product)
         <tr>
+          <td>{{$product->id}}</td>
           <td class="align-middle">{{ $product->name }}</td>
           <td class="align-middle">
             @foreach($product->deliveries as $delivery)

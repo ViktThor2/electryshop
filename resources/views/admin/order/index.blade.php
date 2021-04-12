@@ -2,18 +2,13 @@
 
 @section('content')
 
-  <div class="d-flex justify-content-end">
-    <a href="{{route('admin.order.create')}}"
-    class="btn btn-primary mt-2">Új termék</a>
-  </div>
-
-  <table class="table table-hover mt-3">
+  <table class="table table-hover">
 
     <thead>
       <tr>
         <th>Id</th>
         <th>Vásárló</th>
-        <th>Elérhetőséek</th>
+        <th>Elérhetőségek</th>
         <th>Végösszeg</th>
         <th>Cím</th>
         <th>Rendelés ideje</th>

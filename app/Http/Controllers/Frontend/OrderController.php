@@ -4,27 +4,29 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use App\Models\ShopCart;
+use App\Models\{Order, ShopCart, Delivery, Product};
 
 class OrderController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
       $scart = session()->get('scart');
-      $sum = 0;
-      if(isset($scart)){
-        foreach ($scart as $id => $value) {
-          $sum += $value['sum'];
-        }
-      }
-      return view('frontend.order.create')
-          ->with('sum', $sum);
+
+      $delivery = Delivery::find($request->delivery_id);
+      $scart['100'] = array(
+         "id"     =>  $delivery->id,
+         "name"   =>  $delivery->name,
+         "price"  =>  $delivery->price,
+         "qty"    =>  1,
+         "sum"    =>  $delivery->price
+      );
+
+      session()->put('scart', $scart);
+      return view('frontend.order.create');
     }
 
     public function store(Request $request)
     {
-      $order = new Order;
       $this->validate($request, [
         'name'    =>  'required|max:255',
         'email'   =>  'required|email',
@@ -35,29 +37,37 @@ class OrderController extends Controller
         'house'   =>  'required|max:5'
       ]);
 
-      $order->setData($request->all());
+      session()->put('adress', $request->all());
+      return redirect()->route('order.final.create');
+    }
+
+    public function finalCreate()
+    {
+      $sum = ShopCart::sum();
+      return view('frontend.order.final_create')
+        ->with('sum', $sum);
+    }
+
+    public function finalStore()
+    {
+      $order = New Order;
+      $order->setData();
+      $order->price = ShopCart::sum();
       $order->save();
 
-      return redirect()->route('order.final.create', $order->id);
-    }
-
-    public function finalCreate($orderId)
-    {
-      $order = Order::find($orderId);
-      return view('frontend.order.final_create')
-        ->with('order', $order);
-    }
-
-    public function finalStore($orderId)
-    {
       foreach( session('scart') as $id => $item ) {
         $shopcart = new ShopCart;
-        $shopcart->order_id = $orderId;
+        $shopcart->order_id = $order->id;
         $shopcart->saveData($item);
         $shopcart->save();
+        
+        if( session('scart')[$id]['id'] != 1) {
+          Product::find(session('scart')[$id]['id'])
+            ->decrement('qty', session('scart')[$id]['qty']);
+        }
       }
-      session()->forget('scart');
 
+      session()->forget('scart');
       return redirect()->route('index');
     }
 

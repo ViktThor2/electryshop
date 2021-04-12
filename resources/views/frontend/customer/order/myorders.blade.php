@@ -12,7 +12,7 @@
         <th>Ár</th>
         <th>Eléhetőségek</th>
         <th>Rendelési leadása</th>
-        <th><th>
+        <th></th>
       </tr>
     </thead>
 
@@ -34,5 +34,9 @@
     </tbody>
 
   </table>
+
+  <div class="d-flex justify-content-end">
+      {!! $customerOrders->links() !!}
+  </div>
 
 @stop

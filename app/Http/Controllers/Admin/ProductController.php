@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\SubCategory;
-use App\Models\Delivery;
+use App\Models\{Product, Delivery, SubCategory};
 
 class ProductController extends Controller
 {
@@ -57,7 +55,7 @@ class ProductController extends Controller
 
     public function filterCategory(Request $request)
     {
-      $products = Product::filterCategory($request->filterCategory)->paginate('8');
+      $products = Product::filterCategory($request->filterCategory)->paginate('10');
       $categories = SubCategory::all();
 
       return view('admin.product.index')

@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
-use App\Models\ShopCart;
-use App\Models\Delivery;
+use App\Models\{Product, ShopCart, Delivery};
 
 class ShopCartController extends Controller
 {

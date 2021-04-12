@@ -16,7 +16,6 @@ class Product extends Model
       $this->category_id     = $category;
     }
 
-
     public function scopeFilter($query, $data)
     {
       if(null !== $data->sortProduct && $data->sortProduct) {
@@ -47,15 +46,20 @@ class Product extends Model
 
       if(null !== $data->filterPrice && $data->filterPrice) {
         foreach ($data->filterPrice as $key => $value) {
-          $query->whereNotBetween('price', [$value, $value + 25000]);
+          $query->whereBetween('price', [$value, $value+25000]);
         }
       }
 
     }
 
-    public function scopeFilterCategory($query, $data)
+    public function scopeFiltercat($query, $data)
     {
-      $query->orWhere('sub_category_id', 'LIKE', $data);
+      $query->orWhere('category_id', 'LIKE', '%'.$data.'%');
+    }
+
+    public function scopeSearch($query, $data)
+    {
+      $query->where('name', 'LIKE', '%' . $data . '%');
     }
 
     public function category()
