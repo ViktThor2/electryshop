@@ -63,7 +63,10 @@ Route::namespace('Frontend')->group(function () {
         Route::get('/profil/rendeles/{orderId}', 'CustomerOrderController@show')->name('myorder.show');
 
         // Kommentek
-        Route::post('/komment/letrehoz', 'CommentController@store')->name('comment.store');
+        Route::middleware('comment_has')->group(function () {
+          Route::post('/komment/letrehoz', 'CommentController@store')->name('comment.store');
+        });
+
     });
 
 });

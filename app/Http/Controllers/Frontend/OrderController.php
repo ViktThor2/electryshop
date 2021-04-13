@@ -14,7 +14,7 @@ class OrderController extends Controller
 
       $delivery = Delivery::find($request->delivery_id);
       $scart['100'] = array(
-         "id"     =>  $delivery->id,
+         "id"     =>  100,
          "name"   =>  $delivery->name,
          "price"  =>  $delivery->price,
          "qty"    =>  1,
@@ -60,8 +60,8 @@ class OrderController extends Controller
         $shopcart->order_id = $order->id;
         $shopcart->saveData($item);
         $shopcart->save();
-        
-        if( session('scart')[$id]['id'] != 1) {
+
+        if( session('scart')[$id]['id'] != 100) {
           Product::find(session('scart')[$id]['id'])
             ->decrement('qty', session('scart')[$id]['qty']);
         }

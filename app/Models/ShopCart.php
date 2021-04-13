@@ -27,9 +27,9 @@ class ShopCart extends Model
     return $sum;
   }
 
-  public function productDecrement($projectId = 3)
+  public function productDecrement($projectId)
   {
-    DB::table('products')->decrement('qty', 3)->where('projectId', '=', '5');
+    DB::table('products')->decrement('qty', 3)->where('projectId', '=', $projectId);
   }
 
 }

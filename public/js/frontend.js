@@ -145,9 +145,9 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\xampp\htdocs\ElectryShop\node_modules\mdb-ui-kit\js\mdb.min.js */"./node_modules/mdb-ui-kit/js/mdb.min.js");
-__webpack_require__(/*! c:\xampp\htdocs\ElectryShop\resources\sass\admin.scss */"./resources/sass/admin.scss");
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\ElectryShop\resources\sass\frontend.scss */"./resources/sass/frontend.scss");
+__webpack_require__(/*! C:\xampp\htdocs\electryshop\node_modules\mdb-ui-kit\js\mdb.min.js */"./node_modules/mdb-ui-kit/js/mdb.min.js");
+__webpack_require__(/*! C:\xampp\htdocs\electryshop\resources\sass\admin.scss */"./resources/sass/admin.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\electryshop\resources\sass\frontend.scss */"./resources/sass/frontend.scss");
 
 
 /***/ })

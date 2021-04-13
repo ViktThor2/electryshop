@@ -2,6 +2,10 @@
 
 @section('content')
 
+@if(session()->has('message'))
+  <h3>{{session('message')}}</h3>
+@endif
+
   <div class="row">
 
     <div class="col-lg-4">

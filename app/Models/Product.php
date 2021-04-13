@@ -46,7 +46,7 @@ class Product extends Model
 
       if(null !== $data->filterPrice && $data->filterPrice) {
         foreach ($data->filterPrice as $key => $value) {
-          $query->whereBetween('price', [$value, $value+25000]);
+          $query->whereBetween('price', [$value, $value+50000]);
         }
       }
 
