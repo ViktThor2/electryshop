@@ -15,13 +15,8 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="{{route('product.index', 3) }}">
-            Tv</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('product.index', 2) }}">
-            Fejhallgatók</a>
+          <a class="nav-link" href="{{route('product.index') }}">
+            Termékek</a>
         </li>
 
       </ul>

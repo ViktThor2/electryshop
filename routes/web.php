@@ -27,7 +27,7 @@ Route::namespace('Frontend')->group(function () {
     Route::delete('/kilepes', 'CustomerAuthController@destroy')->name('customer.auth.destroy');
 
     // Termékek
-    Route::get('/termekek/{id}', 'ProductController@index')->name('product.index');
+    Route::get('/termekek', 'ProductController@index')->name('product.index');
     Route::get('/termek/{id}', 'ProductController@show')->name('product.show');
 
     // Termék szürő
@@ -36,11 +36,10 @@ Route::namespace('Frontend')->group(function () {
 
     // Kosár
     Route::get('/kosar', 'ShopCartController@index')->name('scart.index');
-
+    // Mennyiség és Státussz ellenőrzés
     Route::middleware('shopcart_product_check')->group(function () {
       Route::get('/kosarba/{itemId}/hozzaad', 'ShopCartController@add')->name('scart.add');
     });
-
     Route::get('/kosarba/{itemId}/plus', 'ShopCartController@plus')->name('scart.plus');
     Route::get('/kosarba/{itemId}/minus', 'ShopCartController@minus')->name('scart.minus');
     Route::get('/kosarba/{itemId}/torles', 'ShopCartController@destroyProduct')->name('scart.delete');
@@ -63,6 +62,8 @@ Route::namespace('Frontend')->group(function () {
         Route::get('/profil/rendelesek', 'CustomerOrderController@myorders')->name('customer.order.pivot');
         Route::get('/profil/rendeles/{orderId}', 'CustomerOrderController@show')->name('myorder.show');
 
+        // Kommentek
+        Route::post('/komment/letrehoz', 'CommentController@store')->name('comment.store');
     });
 
 });

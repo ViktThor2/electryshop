@@ -32,7 +32,7 @@
       @foreach($products as $product)
         <tr>
           <td class="align-middle">{{ $product->id }}</td>
-          <td class="align-middle">{{ $product['name'] }}</td>
+          <td class="align-middle">{{ $product->name }}</td>
           <td class="align-middle">
             {{ $product->category->name }} \ {{ $product->subcategory->name }}
           </td>

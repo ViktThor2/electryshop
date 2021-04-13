@@ -52,14 +52,14 @@ class Product extends Model
 
     }
 
-    public function scopeFiltercat($query, $data)
-    {
-      $query->orWhere('category_id', 'LIKE', '%'.$data.'%');
-    }
-
     public function scopeSearch($query, $data)
     {
       $query->where('name', 'LIKE', '%' . $data . '%');
+    }
+
+    public function scopeFiltercategory($query, $data)
+    {
+      $query->orWhere('sub_category_id', 'LIKE', '%'.$data.'%');
     }
 
     public function category()
@@ -75,6 +75,11 @@ class Product extends Model
     public function deliveries()
     {
       return $this->belongsToMany(Delivery::class);
+    }
+
+    public function comments()
+    {
+      return $this->hasMany(Comment::Class);
     }
 
 }
