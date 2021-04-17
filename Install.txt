@@ -1,6 +1,6 @@
 Install
 
-1, https://github.com/ViktThor2/electryshop.git
+1, git clone https://github.com/ViktThor2/electryshop.git
 2, cd electryshop
 3, composer update
 4, npm install
